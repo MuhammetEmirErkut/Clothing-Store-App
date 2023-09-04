@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BamostMobileAppV4</string>
+    <string name="navigation_drawer_open">Aç</string>
+    <string name="navigation_drawer_close">Kapat</string>
+    <string name="navigation_drawer_open1">Aç</string>
+    <string name="navigation_drawer_close2">Kapat</string>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="410dp">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="408dp"
+        android:background="#FEFEFE"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="295dp"
+            app:srcCompat="@drawable/dress1" />
+
+        <TextView
+            android:id="@+id/dressNameTextView"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="Aris Kolej Ceket - SİYAH"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="1,999.99"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

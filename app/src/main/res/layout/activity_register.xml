@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+
+    <FrameLayout
+        android:id="@+id/containersLoginLayout"
+        android:layout_width="411dp"
+        android:layout_height="700dp"
+
+        android:background="#FCFCFC"
+        android:backgroundTint="#FEFEFE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <!-- Diğer layoutları buraya ekle -->
+
+        <include
+            layout="@layout/menu_drawerlayout"
+            android:layout_width="409dp"
+            android:layout_height="641dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <include
+            layout="@layout/search_drawerlayout"
+            android:layout_width="409dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="89dp" />
+
+        <include
+            layout="@layout/cart_drawerlayout"
+            android:layout_width="409dp"
+            android:layout_height="671dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="89dp" />
+
+        <ScrollView
+            android:id="@+id/mainviewLoginScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/sell50LoginLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="390dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_height="410dp">
+
+                    <LinearLayout
+                        android:layout_width="392dp"
+                        android:layout_height="410dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">>
+
+                        <TextView
+                            android:id="@+id/textLoginView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/bebas_neue"
+                            android:layout_marginTop="20dp"
+                            android:text="KAYIT OL"
+                            android:textColor="#000000"
+                            android:textSize="24sp" />
+
+                        <LinearLayout
+                            android:layout_width="353dp"
+                            android:layout_height="49dp"
+                            android:layout_marginTop="19dp"
+                            android:background="@drawable/softgray_background"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/editNameText"
+                                android:layout_width="357dp"
+                                android:layout_height="87dp"
+                                android:layout_gravity="center"
+                                android:ems="10"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:hint="Ad"
+                                android:inputType="text"
+                                android:textColorHint="#959595" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="353dp"
+                            android:layout_height="49dp"
+                            android:layout_marginTop="19dp"
+                            android:background="@drawable/softgray_background"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/editSurNameText"
+                                android:layout_width="357dp"
+                                android:layout_height="87dp"
+                                android:layout_gravity="center"
+                                android:ems="10"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:hint="Soyad"
+                                android:inputType="text"
+                                android:textColorHint="#959595" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                        android:layout_width="353dp"
+                        android:layout_height="49dp"
+                        android:layout_marginTop="19dp"
+                        android:background="@drawable/softgray_background"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editEmailText"
+                            android:layout_width="357dp"
+                            android:layout_height="87dp"
+                            android:layout_gravity="center"
+                            android:ems="10"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:hint="E-Posta Adresi"
+                            android:inputType="text"
+                            android:textColorHint="#959595" />
+                    </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="353dp"
+                            android:layout_height="49dp"
+                            android:layout_marginTop="19dp"
+
+                            android:background="@drawable/softgray_background"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/editPasswordText"
+                                android:layout_width="357dp"
+                                android:layout_height="87dp"
+                                android:layout_gravity="center"
+                                android:ems="10"
+
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:hint="Şifre"
+                                android:inputType="text"
+                                android:textColorHint="#959595" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="286dp"
+                            android:layout_height="55dp"
+                            android:layout_marginTop="19dp"
+
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/registerButton3"
+                                android:layout_width="153dp"
+                                android:layout_height="56dp"
+                                android:layout_gravity="center"
+                                android:backgroundTint="#BABABA"
+                                android:fontFamily="@font/bebas_neue"
+                                android:onClick="registerButton"
+                                android:text="kayıt ol"
+                                android:textColor="#000000"
+                                android:textSize="20sp"
+                                app:strokeColor="@color/black"
+                                app:strokeWidth="2dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="250dp"
+                            android:layout_height="33dp"
+                            android:layout_marginTop="19dp"
+
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/forgotPassword3"
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-condensed-medium"
+
+                                android:text="Hesabın yok mu?" />
+
+                            <TextView
+                                android:id="@+id/forgotPassword2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-condensed-medium"
+
+                                android:text="Kayıt Ol"
+                                android:textColor="#0B0A0A"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="40dp"
+                    android:background="#232323"
+                    android:backgroundTint="#232323">
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="420dp"
+                        android:layout_height="260dp"
+                        android:background="@drawable/line_background"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.555"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="177dp"
+                            android:layout_height="99dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            app:srcCompat="@drawable/bamostlogoblack" />
+
+                        <TextView
+                            android:id="@+id/textViewBulten22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="E-Bültene kaydol. Yeni ürünleri ve kampanyaları kaçırma."
+                            android:textColor="#FFFFFF" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutBulten2"
+                            android:layout_width="319dp"
+                            android:layout_height="37dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/bordergray_backgroundd"
+                            android:orientation="horizontal">
+
+
+                            <EditText
+                                android:id="@+id/eBultenEditText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="55dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:backgroundTint="#000000"
+                                android:ems="10"
+                                android:hint="Email"
+                                android:inputType="text"
+                                android:textColor="#FFFFFF"
+                                android:textColorHint="#9E9E9E"
+                                android:textSize="16sp"
+                                tools:ignore="DuplicateIds" />
+
+                            <Button
+                                android:id="@+id/registerButton2"
+                                android:layout_width="100dp"
+                                android:layout_height="35dp"
+                                android:layout_marginEnd="5dp"
+                                android:backgroundTint="#232323"
+                                android:fontFamily="@font/bebas_neue"
+                                android:onClick="registerScreenActivity"
+                                android:text="KAYIT OL"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/faceImageView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="face"
+                                app:srcCompat="@drawable/face" />
+
+                            <ImageView
+                                android:id="@+id/instaImageView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="insta"
+                                app:srcCompat="@drawable/insta" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="409dp"
+                        android:layout_height="338dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                        <TextView
+                            android:id="@+id/textViewYasal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="30dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="YASAL"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/mesaSatiSozTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:onClick="mesaSatiSoz"
+                            android:text="Mesafeli Satış Sözleşmesi"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/giPoliTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:onClick="giPoli"
+                            android:text="Gizlilik Politikası"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/iadeTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:onClick="iade"
+                            android:text="İade ve Değişim"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/textViewSirket"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="30dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="ŞİRKET"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/hesapTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:onClick="hesap"
+                            android:text="Hesabım Sayfası"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/iletisimTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:onClick="iletisim"
+                            android:text="İletişim"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/topSatiTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:onClick="topSati"
+                            android:text="Toptan Satış"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:id="@+id/view3"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="40dp"
+                            android:background="#070707" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="52dp"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="41dp"
+                                android:layout_height="27dp"
+                                android:layout_marginEnd="9dp"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/visa" />
+
+                            <ImageView
+                                android:id="@+id/imageView8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="9dp"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/maestro" />
+
+                            <ImageView
+                                android:id="@+id/imageView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="12dp"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/mastercard" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="89dp"
+        android:layout_alignParentTop="true"
+        android:background="#BFBBBB"
+        android:backgroundTint="#DDDADA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/sellTextView"
+            android:layout_width="414dp"
+            android:layout_height="29dp"
+            android:background="#302F2F"
+            android:fontFamily="@font/bebas_neue"
+            android:gravity="center"
+            android:text="1000TL Üzeri Siparişllerde Kargo Ücretsiz - 12 Aya Varan Taksit"
+            android:textColor="#F9F9F9"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sellTextView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view"
+                android:layout_width="59dp"
+                android:layout_height="59dp"
+                android:background="#FCFCFC"
+                android:onClick="menuButton">
+
+                <ImageView
+                    android:id="@+id/view1"
+                    android:layout_width="59dp"
+                    android:layout_height="59dp"
+                    android:background="#FDFDFD"
+                    android:onClick="menuButton"
+                    android:src="@drawable/x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/line3"
+                    android:layout_width="26dp"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="#000000"
+                    android:backgroundTint="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.461"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line2"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/line2"
+                    android:layout_width="26dp"
+                    android:layout_height="2dp"
+                    android:background="#000000"
+                    android:backgroundTint="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.461"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/line1"
+                    android:layout_width="26dp"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#000000"
+                    android:backgroundTint="#000000"
+                    app:layout_constraintBottom_toTopOf="@+id/line2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.47"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.97" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imageViewHub"
+                android:layout_width="135dp"
+                android:layout_height="match_parent"
+                android:onClick="mainHubButton"
+                android:background="#FEFEFE"
+                app:srcCompat="@drawable/bamostbasic" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="144dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FDFDFD"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="#FCFCFC">
+
+                <ImageView
+                    android:id="@+id/imageViewX"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:background="#FDFDFD"
+                    android:backgroundTint="#FEFEFE"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageViewSearch"
+                    app:layout_constraintStart_toStartOf="@+id/imageViewSearch"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/x" />
+
+                <ImageView
+                    android:id="@+id/imageViewSearch"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#FEFEFE"
+                    android:backgroundTint="#FEFEFE"
+                    android:onClick="search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/search" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imageViewAvatar"
+                android:layout_width="95dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FDFDFD"
+                android:backgroundTint="#FEFEFE"
+                android:onClick="avatar"
+                app:srcCompat="@drawable/avatar" />
+
+            <ImageView
+                android:id="@+id/imageViewMall"
+                android:layout_width="95dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FDFDFD"
+                android:backgroundTint="#FEFEFE"
+                android:onClick="cart"
+                app:srcCompat="@drawable/malll" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
