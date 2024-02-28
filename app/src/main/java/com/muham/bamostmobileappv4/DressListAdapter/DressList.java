@@ -1,4 +1,4 @@
-package com.muham.bamostmobileappv4;
+package com.muham.bamostmobileappv4.DressListAdapter;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -20,7 +20,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -30,20 +30,21 @@ import com.muham.bamostmobileappv4.Account.AccountOrderActivity;
 import com.muham.bamostmobileappv4.Account.LoginActivity;
 import com.muham.bamostmobileappv4.Account.LoginListener;
 import com.muham.bamostmobileappv4.Adapter.Dresses;
-import com.muham.bamostmobileappv4.Adapter.DressesAdapter;
-import com.muham.bamostmobileappv4.DressListAdapter.DressList;
+import com.muham.bamostmobileappv4.R;
 import com.muham.bamostmobileappv4.menuInfo.Cargo;
 import com.muham.bamostmobileappv4.menuInfo.Comminicate;
 import com.muham.bamostmobileappv4.menuInfo.OrderBuy;
 import com.muham.bamostmobileappv4.menuInfo.OrderTracking;
 import com.muham.bamostmobileappv4.menuInfo.ReturnExchange;
 import com.muham.bamostmobileappv4.menuInfo.WholeSale;
-
+import com.muham.bamostmobileappv4.tasarimInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements tasarimInterface, LoginListener {
+public class DressList extends AppCompatActivity implements tasarimInterface, LoginListener {
     //Menu
     private View line1, line2, line3;
     private View x;
@@ -74,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
     // Giyim
     TextView headerDressMoreTextView;
     TextView headerDressBackTexView;
-    // Yeniler
-    TextView headerMenuNewTexView;
 
     private View searchX, search;
     private boolean isXShape = false;
@@ -106,12 +105,12 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
 
     View searchDrawerLayoutH;
 
-    View cartDrawerLayoutH;//Hİyerarşi
+    View cartDrawerLayoutH;//Hİyerarşinin H si
 
-    View menuviewScrollViewH;
+    View mainviewDressListScrollViewH;
 
     private TextView sell50;
-    private TextView sell51;
+
 
     //TOOLBAR
 
@@ -119,35 +118,74 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
     //private Handler handler = new Handler();
     //private Animation slideDown, slideUp;
 
+    //kıyafet yalandan
     private RecyclerView recyclerView;
-    private DressesAdapter adapter;
+    private DressListAdapter adapter;
     private List<Dresses> dressesList;
     //Fav
     ImageView favoriView;
+
+    //Kıyafet Listesi DressList
+
+    RecyclerView dressListRecyclerView;
+    private DressListAdapter dressListAdapter;
+    private List<Dresses> dressListItemList;
+    private boolean isSortOpen = false;
+    private boolean isFilterOpen = false;
+    private DrawerLayout filterDrawerLayout;
+    View filterDrawerLayoutH;
+    NavigationView filterNavigationView;
+    ImageView filterBackImageView;
+    View sortMoreLayout;
+    TextView artanTextView;
+    TextView azalanTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_dress_list);
 
         favoriView = findViewById(R.id.imageViewFav);
         favoriView.setVisibility(View.GONE);
+
+        sortMoreLayout = findViewById(R.id.sortMoreLayout);
+        sortMoreLayout.setVisibility(View.GONE);
+
         onLogin();
         onInheritCreate();
 
     }
-    public void onInheritCreate(){
-
+    public void onInheritCreate() {
         menu();
         search();
         cart();
-        mainViewDresses();
+        filter();
 
         textAnim(sell50);
-        textAnim(sell51);
 
+        // dressListRecyclerView'yi başlatın
+        dressListRecyclerView = findViewById(R.id.dressListRecyclerView);
+
+
+
+        dressListItemList = new ArrayList<>();
+        dressListItemList.add(new Dresses(R.layout.dress, R.drawable.dress1, "Aris Kolej Ceket - SİYAH", 1999));
+        dressListItemList.add(new Dresses(R.layout.dress, R.drawable.dress2, "Flow - Desenli Denim Şapka", 299));
+        dressListItemList.add(new Dresses(R.layout.dress, R.drawable.dress3, "Kane - Kolsuz T-Shirt - SİYAH", 278));
+        // Diğer elbiseleri eklemeye devam edebilirsiniz.
+
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        dressListRecyclerView.setLayoutManager(layoutManager);
+        adapter = new DressListAdapter(this, dressListItemList);
+        dressListRecyclerView.setAdapter(adapter);
+
+        sort();
     }
+
+
+
     public void adressScreenActivity(View view){
 
         String url = "https://www.google.com/maps/place/BAMOST+BEYKENT+SHOWROOM/@41.0068407,28.6251377,15z/data=!4m6!3m5!1s0x14cabbdbf2dabacf:0xc2cd531bd29619a!8m2!3d41.0068407!4d28.6251377!16s%2Fg%2F11h_kvw_mv?hl=tr&shorturl=1"; // Açmak istediğiniz web sitesinin URL'si
@@ -155,9 +193,91 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
         startActivity(intent);
 
     }
+    public void sort() {
+        artanTextView = findViewById(R.id.artanTextView);
+        artanTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dressListItemList != null && dressListItemList.size() > 0) {
+                    // DressListItemList'i fiyata göre sırala (küçükten büyüğe)
+                    Collections.sort(dressListItemList, new Comparator<Dresses>() {
+                        @Override
+                        public int compare(Dresses dress1, Dresses dress2) {
+                            return Double.compare(dress1.getFiyat(), dress2.getFiyat());
+                        }
+                    });
+
+                    // Sıralanmış listeyi adapter'a bildirerek RecyclerView'ı güncelle
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        azalanTextView = findViewById(R.id.azalanTextView);
+
+        azalanTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (dressListItemList != null && dressListItemList.size() > 0) {
+                    // DressListItemList'i fiyata göre sırala (büyükten küçüğe)
+                    Collections.sort(dressListItemList, new Comparator<Dresses>() {
+                        @Override
+                        public int compare(Dresses dress1, Dresses dress2) {
+                            return Double.compare(dress2.getFiyat(), dress1.getFiyat());
+                        }
+                    });
+
+                    // Sıralanmış listeyi adapter'a bildirerek RecyclerView'ı güncelle
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+    }
+
+
+    public void sortButton(View view){
+
+            if (isSortOpen) {
+                sortMoreLayout.setVisibility(View.GONE);
+            } else {
+                sortMoreLayout.setVisibility(View.VISIBLE);
+            }
+
+        isSortOpen = !isSortOpen;
+    }
+    public void filter(){
+        filterNavigationView = findViewById(R.id.filter_navigationview);
+
+        View filterHeaderView = filterNavigationView.getHeaderView(0);
+
+        filterBackImageView = filterHeaderView.findViewById(R.id.filterBackImageView);
+
+        filterBackImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filterDrawerLayout.closeDrawer(GravityCompat.START);
+                mainviewDressListScrollViewH.bringToFront();
+
+                isFilterOpen = !isFilterOpen;
+            }
+        });
+    }
+    public void filterButton(View view){
+        filterDrawerLayout = findViewById(R.id.filterDrawerLayout);
+        filterDrawerLayoutH = findViewById(R.id.filterDrawerLayout);
+
+        if (isFilterOpen){
+            filterDrawerLayout.closeDrawer(GravityCompat.START);
+            mainviewDressListScrollViewH.bringToFront();
+        }else {
+            filterDrawerLayout.openDrawer(GravityCompat.START);
+            filterDrawerLayoutH.bringToFront();
+        }
+        isFilterOpen = !isFilterOpen;
+    }
     public void menu(){
         sell50 = findViewById(R.id.sell50);
-        sell51 = findViewById(R.id.sell51);
 
         line1 = findViewById(R.id.line1);
         line2 = findViewById(R.id.line2);
@@ -168,9 +288,9 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
         searchX = findViewById(R.id.imageViewX);
         search = findViewById(R.id.imageViewSearch);
 
-        menuviewScrollViewH = findViewById(R.id.mainviewLoginScrollView);
+        mainviewDressListScrollViewH = findViewById(R.id.mainviewDressListScrollView);
 
-        menuDrawerLayout = findViewById(R.id.menuDrawerLayout);
+        menuDrawerLayout = findViewById(R.id.menuDrawerLayout);//öne atmak için hiyerari
 
         drawerLayout = findViewById(R.id.menuDrawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -216,10 +336,6 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
         collectionLinearLayout.setVisibility(View.GONE);
         dressesLinearLayout.setVisibility(View.GONE);
 
-        //Yeniler
-
-        headerMenuNewTexView = menuHeaderView.findViewById(R.id.menuNewTexView);
-
 
         //INFO
         headerMenuInfoTextView.setOnClickListener(new View.OnClickListener() {
@@ -239,42 +355,42 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
         headerOrderTrackingTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, OrderTracking.class);
+                Intent intent = new Intent(DressList.this, OrderTracking.class);
                 startActivity(intent);
             }
         });
         headerWholeSaleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, WholeSale.class);
+                Intent intent = new Intent(DressList.this, WholeSale.class);
                 startActivity(intent);
             }
         });
         headerComminicateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Comminicate.class);
+                Intent intent = new Intent(DressList.this, Comminicate.class);
                 startActivity(intent);
             }
         });
         headerCargoTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Cargo.class);
+                Intent intent = new Intent(DressList.this, Cargo.class);
                 startActivity(intent);
             }
         });
         headerOrderBuyTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, OrderBuy.class);
+                Intent intent = new Intent(DressList.this, OrderBuy.class);
                 startActivity(intent);
             }
         });
         headerReturnExchangeTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ReturnExchange.class);
+                Intent intent = new Intent(DressList.this, ReturnExchange.class);
                 startActivity(intent);
             }
         });
@@ -309,16 +425,6 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
             public void onClick(View view) {
                 menuLinearLayout.setVisibility(View.VISIBLE);
                 dressesLinearLayout.setVisibility(View.GONE);
-            }
-        });
-
-        //Yeniler
-
-        headerMenuNewTexView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DressList.class);
-                startActivity(intent);
             }
         });
 
@@ -364,20 +470,10 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
 
         headerCartBackButton1 = findViewById(R.id.headerCartBack1);
         headerCartBackButton2 = findViewById(R.id.headerCartBack2);
+
+
     }//imple
-    private void mainViewDresses(){
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        dressesList = new ArrayList<>();
-        dressesList.add(new Dresses(R.layout.dress, R.drawable.dress1, "Aris Kolej Ceket - SİYAH", 1.999));
-        dressesList.add(new Dresses(R.layout.dress, R.drawable.dress2, "Flow - Desenli Denim Şapka", 299.99));
-        dressesList.add(new Dresses(R.layout.dress, R.drawable.dress3, "Kane - Kolsuz T-Shirt - SİYAH", 278.99));
-        // Diğer elbiseleri eklemeye devam edebilirsiniz.
-
-        adapter = new DressesAdapter(this, dressesList);
-        recyclerView.setAdapter(adapter);
-    }
     public void textAnim(View view){
         ViewTreeObserver vto = view.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -405,6 +501,9 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
     public void cartBackButton(View view) {
         cartDrawerLayout.bringToFront();
         cartDrawerLayout.closeDrawer(GravityCompat.END);
+
+        mainviewDressListScrollViewH.bringToFront();
+        
         isXShapeForCart =  !isXShapeForCart;
     }
     public void menuButton(View view) {
@@ -421,7 +520,7 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
             cartDrawerLayout.bringToFront();
             menuDrawerLayout.bringToFront();
             searchDrawerLayoutH.bringToFront();
-            menuviewScrollViewH.bringToFront();
+            mainviewDressListScrollViewH.bringToFront();
 
 
             anim1 = ObjectAnimator.ofFloat(line1, "rotation", 45f, 0f);
@@ -434,7 +533,7 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
         else {
             searchDrawerLayoutH.bringToFront();
             cartDrawerLayout.bringToFront();
-            menuviewScrollViewH.bringToFront();
+            mainviewDressListScrollViewH.bringToFront();
             menuDrawerLayout.bringToFront();
 
 
@@ -480,14 +579,14 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
             searchDrawerLayoutH.bringToFront();
             cartDrawerLayout.bringToFront();
             menuDrawerLayout.bringToFront();
-            menuviewScrollViewH.bringToFront();
+            mainviewDressListScrollViewH.bringToFront();
 
             searchDrawerLayout.closeDrawer(GravityCompat.END);
             anim1 = ObjectAnimator.ofFloat(search, "alpha", 0f, 1f);
         } else {
             menuDrawerLayout.bringToFront();
             cartDrawerLayout.bringToFront();
-            menuviewScrollViewH.bringToFront();
+            mainviewDressListScrollViewH.bringToFront();
             searchDrawerLayoutH.bringToFront();
 
             searchDrawerLayout.openDrawer(GravityCompat.END);
@@ -520,7 +619,7 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
 
         if (isXShapeForCart){
             cartDrawerLayout.bringToFront();
-            menuviewScrollViewH.bringToFront();
+            mainviewDressListScrollViewH.bringToFront();
             cartDrawerLayout.closeDrawer(GravityCompat.END);
         }else {
             cartDrawerLayout.bringToFront();

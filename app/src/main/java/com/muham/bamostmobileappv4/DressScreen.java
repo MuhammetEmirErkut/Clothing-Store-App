@@ -1,11 +1,13 @@
-package com.muham.bamostmobileappv4.Account;
+package com.muham.bamostmobileappv4;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,22 +20,45 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.muham.bamostmobileappv4.MainActivity;
-import com.muham.bamostmobileappv4.R;
-import com.muham.bamostmobileappv4.tasarimInterface;
+import com.muham.bamostmobileappv4.Account.AccountOrderActivity;
+import com.muham.bamostmobileappv4.Account.LoginActivity;
+import com.muham.bamostmobileappv4.Account.LoginListener;
+import com.muham.bamostmobileappv4.Adapter.Dresses;
+import com.muham.bamostmobileappv4.Adapter.DressesAdapter;
+import com.muham.bamostmobileappv4.DressListAdapter.DressList;
+import com.muham.bamostmobileappv4.menuInfo.Cargo;
+import com.muham.bamostmobileappv4.menuInfo.Comminicate;
+import com.muham.bamostmobileappv4.menuInfo.OrderBuy;
+import com.muham.bamostmobileappv4.menuInfo.OrderTracking;
+import com.muham.bamostmobileappv4.menuInfo.ReturnExchange;
+import com.muham.bamostmobileappv4.menuInfo.WholeSale;
 
-public class AccountOrderActivity extends AppCompatActivity implements tasarimInterface, LoginListener {
+import java.util.List;
+
+public class DressScreen extends AppCompatActivity implements tasarimInterface, LoginListener {
+    //Menu
+    private View line1, line2, line3;
+    private View x;
+    TextView menuSellTextView;
+    TextView menuNewTextView;
+    TextView menuCollectionTextView;
+    TextView menuDressTextView;
+    //Info
     TextView headerMenuInfoTextView;
     TextView headerBackTextView;
     private NavigationView menuNavigationView;
-
+    TextView headerOrderTrackingTextView;
+    TextView headerWholeSaleTextView;
+    TextView headerComminicateTextView;
+    TextView headerCargoTextView;
+    TextView headerOrderBuyTextView;
+    TextView headerReturnExchangeTextView;
+    //
     LinearLayout menuLinearLayout;
     LinearLayout ınfoLinearLayout;
     LinearLayout collectionLinearLayout;
@@ -46,8 +71,8 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
     // Giyim
     TextView headerDressMoreTextView;
     TextView headerDressBackTexView;
-    private View line1, line2, line3;
-    private View x;
+    // Yeniler
+    TextView headerMenuNewTexView;
 
     private View searchX, search;
     private boolean isXShape = false;
@@ -82,99 +107,55 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
 
     View menuviewScrollViewH;
 
-    ImageView favoriView;
+    private TextView sell50;
+    private TextView sell51;
 
-    TextView helloNameSurnameTextView;
-    TextView mailTextView;
+    //TOOLBAR
+
+    // private View constraintLayout2;
+    //private Handler handler = new Handler();
+    //private Animation slideDown, slideUp;
+
+    //kıyafet yalandan
+    private RecyclerView recyclerView;
+    private DressesAdapter adapter;
+    private List<Dresses> dressesList;
+    //Fav
+    ImageView favoriView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_order);
+        setContentView(R.layout.activity_dress_screen);
 
         favoriView = findViewById(R.id.imageViewFav);
-
-
-
+        favoriView.setVisibility(View.GONE);
+        onLogin();
         onInheritCreate();
-    }
-    public void dbConnection(){
-        helloNameSurnameTextView = findViewById(R.id.helloNameSurnameTextView);
-        mailTextView = findViewById(R.id.mailtextView);
-
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String userId = mAuth.getCurrentUser().getUid();
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference userRef = db.collection("Persons").document(userId);
-
-        userRef.get().addOnCompleteListener(userTask -> {
-            if (userTask.isSuccessful()) {
-                DocumentSnapshot document = userTask.getResult();
-                if (document.exists()) {
-                    // Firestore'dan verileri alın
-                    String firstName = document.getString("firstName");
-                    String lastName = document.getString("lastName");
-                    String mail = document.getString("email");
-
-                    helloNameSurnameTextView.setText("MERHABA " + firstName + " " + lastName);
-                    mailTextView.setText(mail);
-
-                }
-            }
-        });
 
     }
-    public void buttonAdresses(View view){
-        Intent intent = new Intent(this,AccountAddressesActivity.class);
+    public void onInheritCreate(){
+
+        menu();
+        search();
+        cart();
+
+        textAnim(sell50);
+        textAnim(sell51);
+
+    }
+    public void adressScreenActivity(View view){
+
+        String url = "https://www.google.com/maps/place/BAMOST+BEYKENT+SHOWROOM/@41.0068407,28.6251377,15z/data=!4m6!3m5!1s0x14cabbdbf2dabacf:0xc2cd531bd29619a!8m2!3d41.0068407!4d28.6251377!16s%2Fg%2F11h_kvw_mv?hl=tr&shorturl=1"; // Açmak istediğiniz web sitesinin URL'si
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
+
     }
-    public void buttonAccountDetails(View view){
-        Intent intent = new Intent(this,AccountDetailsActivity.class);
-        startActivity(intent);
-    }
-    public void buttonSignout(View view){
-        // Ana iş parçacığını dondurmamak için çıkış işlemini arka plan iş parçacığında yapın
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                FirebaseAuth.getInstance().signOut();
-
-                // Ana iş parçacığına geri dön ve UI güncellemelerini yap
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Favori düğmesini gizle veya diğer UI güncellemelerini yap
-                        favoriView.setVisibility(View.GONE);
-                    }
-                });
-            }
-        }).start();
-        mainHubButton();
-    }
-
-
-
-    @Override
-    public void onLogin() {
-        // Kullanıcı giriş yaptığında burası çalışır
-        // Favori butonunu görünür yapabilirsiniz
-        super.onStart();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if (currentUser != null) {
-            // Kullanıcı oturum açmışsa favori butonunu görünür yap
-            favoriView.setVisibility(View.VISIBLE);
-        } else {
-            // Kullanıcı oturum açmamışsa favori butonunu gizle
-            favoriView.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
     public void menu(){
+        sell50 = findViewById(R.id.sell50);
+        sell51 = findViewById(R.id.sell51);
+
         line1 = findViewById(R.id.line1);
         line2 = findViewById(R.id.line2);
         line3 = findViewById(R.id.line3);
@@ -218,12 +199,24 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
         collectionLinearLayout = menuHeaderView.findViewById(R.id.collectionLinearLayout);
         headerCollectionMoreTextView = menuHeaderView.findViewById(R.id.collectionMoreTextView);
         headerCollectionBackTextView = menuHeaderView.findViewById(R.id.backCollectionTextView);
+
         //INFO
         ınfoLinearLayout = menuHeaderView.findViewById(R.id.ınfoLinearLayout);
         headerBackTextView  = menuHeaderView.findViewById(R.id.backTextView);
+        headerOrderTrackingTextView = menuHeaderView.findViewById(R.id.ınfoOrderTrackingTextView);
+        headerWholeSaleTextView = menuHeaderView.findViewById(R.id.ınfoWholeSaleTexView);
+        headerComminicateTextView = menuHeaderView.findViewById(R.id.ınfoComminicateTextView);
+        headerCargoTextView = menuHeaderView.findViewById(R.id.ınfoCargoTextView);
+        headerOrderBuyTextView = menuHeaderView.findViewById(R.id.ınfoOrderBuyTextView);
+        headerReturnExchangeTextView = menuHeaderView.findViewById(R.id.ınfoReturnExchangeTextView);
         ınfoLinearLayout.setVisibility(View.GONE);
         collectionLinearLayout.setVisibility(View.GONE);
         dressesLinearLayout.setVisibility(View.GONE);
+
+        //Yeniler
+
+        headerMenuNewTexView = menuHeaderView.findViewById(R.id.menuNewTexView);
+
 
         //INFO
         headerMenuInfoTextView.setOnClickListener(new View.OnClickListener() {
@@ -238,6 +231,48 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
             public void onClick(View view) {
                 menuLinearLayout.setVisibility(View.VISIBLE);
                 ınfoLinearLayout.setVisibility(View.GONE);
+            }
+        });
+        headerOrderTrackingTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DressScreen.this, OrderTracking.class);
+                startActivity(intent);
+            }
+        });
+        headerWholeSaleTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DressScreen.this, WholeSale.class);
+                startActivity(intent);
+            }
+        });
+        headerComminicateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DressScreen.this, Comminicate.class);
+                startActivity(intent);
+            }
+        });
+        headerCargoTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DressScreen.this, Cargo.class);
+                startActivity(intent);
+            }
+        });
+        headerOrderBuyTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DressScreen.this, OrderBuy.class);
+                startActivity(intent);
+            }
+        });
+        headerReturnExchangeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DressScreen.this, ReturnExchange.class);
+                startActivity(intent);
             }
         });
 
@@ -256,6 +291,7 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
                 collectionLinearLayout.setVisibility(View.GONE);
             }
         });
+
         //Giyim
 
         headerDressMoreTextView.setOnClickListener(new View.OnClickListener() {
@@ -273,10 +309,18 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
             }
         });
 
-    }
+        //Yeniler
 
-    @Override
-    public void search() {
+        headerMenuNewTexView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DressScreen.this, DressList.class);
+                startActivity(intent);
+            }
+        });
+
+    }//imple
+    public void search(){
         searchDrawerLayoutH = findViewById(R.id.searchDrawerLayout);//öne atmak için hiyerarşi
 
         searchDrawerLayout = findViewById(R.id.searchDrawerLayout);
@@ -304,10 +348,8 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
                 // EditText tıklandığında yapılacak işlemler
             }
         });
-    }
-
-    @Override
-    public void cart() {
+    }//imple
+    public void cart(){
         cartDrawerLayoutH = findViewById(R.id.cartDrawerLayout);
 
         cartDrawerLayout = findViewById(R.id.cartDrawerLayout);
@@ -319,17 +361,31 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
 
         headerCartBackButton1 = findViewById(R.id.headerCartBack1);
         headerCartBackButton2 = findViewById(R.id.headerCartBack2);
-
     }
+    public void textAnim(View view){
+        ViewTreeObserver vto = view.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                float textWidth = view.getWidth();
 
-    @Override
-    public void onInheritCreate() {
-        menu();
-        search();
-        cart();
-        dbConnection();
+                // TextView'ı sürekli sola doğru kaydıran animasyon
+                ObjectAnimator scrollAnimator = ObjectAnimator.ofFloat(
+                        view,
+                        "translationX",
+                        0f,
+                        -530f
+                );
+                scrollAnimator.setDuration(5000); // 5 saniye süreyle animasyonu çalıştır
+                scrollAnimator.setInterpolator(null); // Interpolatörü null yaparak sabit hızda kaydırma
+                scrollAnimator.setRepeatCount(ObjectAnimator.INFINITE); // Sonsuz tekrarla
+                scrollAnimator.start();
+
+                // ViewTreeObserver'ı kaldır
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
     }
-
     public void cartBackButton(View view) {
         cartDrawerLayout.bringToFront();
         cartDrawerLayout.closeDrawer(GravityCompat.END);
@@ -429,8 +485,18 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
 
     @Override
     public void avatar(View view) {
-        // Intent intent = new Intent(this, LoginActivity.class);
-        //startActivity(intent);
+        super.onStart();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            Intent intent = new Intent(this, AccountOrderActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     @Override
@@ -446,12 +512,28 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
         }
         isXShapeForCart =  !isXShapeForCart;
     }
-    private void mainHubButton(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    @Override
+    public void onLogin() {
+        // Kullanıcı giriş yaptığında burası çalışır
+        // Favori butonunu görünür yapabilirsiniz
+        super.onStart();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            // Kullanıcı oturum açmışsa favori butonunu görünür yap
+            favoriView.setVisibility(View.VISIBLE);
+        } else {
+            // Kullanıcı oturum açmamışsa favori butonunu gizle
+            favoriView.setVisibility(View.GONE);
+        }
     }
-    public void mainHubButton(View view){
-        mainHubButton();
+    public void buttonSignout(View view){
+        // Çıkış işlemi
+        FirebaseAuth.getInstance().signOut();
+
+        // Favori düğmesini gizle
+        favoriView.setVisibility(View.GONE);
     }
 
 }

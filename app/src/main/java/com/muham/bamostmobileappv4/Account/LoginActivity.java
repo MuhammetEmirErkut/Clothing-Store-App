@@ -1,10 +1,4 @@
-package com.muham.bamostmobileappv4;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+package com.muham.bamostmobileappv4.Account;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -16,16 +10,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.muham.bamostmobileappv4.MainActivity;
+import com.muham.bamostmobileappv4.R;
+import com.muham.bamostmobileappv4.tasarimInterface;
 
 public class LoginActivity extends AppCompatActivity implements tasarimInterface {
+
+    TextView headerMenuInfoTextView;
+    TextView headerBackTextView;
+    private NavigationView menuNavigationView;
+
+    LinearLayout menuLinearLayout;
+    LinearLayout ınfoLinearLayout;
+    LinearLayout collectionLinearLayout;
+    LinearLayout dressesLinearLayout;
+    //
+    //Koleksiyon
+    TextView headerCollectionMoreTextView;
+    TextView headerCollectionBackTextView;
+
+    // Giyim
+    TextView headerDressMoreTextView;
+    TextView headerDressBackTexView;
     private View line1, line2, line3;
     private View x;
 
@@ -82,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements tasarimInterface
 
     }
     @Override
-    public void menu() {
+    public void menu(){
         line1 = findViewById(R.id.line1);
         line2 = findViewById(R.id.line2);
         line3 = findViewById(R.id.line3);
@@ -94,9 +115,9 @@ public class LoginActivity extends AppCompatActivity implements tasarimInterface
 
         menuviewScrollViewH = findViewById(R.id.mainviewLoginScrollView);
 
-        menuDrawerLayout = findViewById(R.id.drawerLayout);//öne atmak için hiyerari
+        menuDrawerLayout = findViewById(R.id.menuDrawerLayout);//öne atmak için hiyerari
 
-        drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout = findViewById(R.id.menuDrawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -109,6 +130,78 @@ public class LoginActivity extends AppCompatActivity implements tasarimInterface
                 return true;
             }
         });
+
+        menuNavigationView = findViewById(R.id.tasarim_navigationview);
+
+        View menuHeaderView = menuNavigationView.getHeaderView(0);
+
+        headerMenuInfoTextView = menuHeaderView.findViewById(R.id.menuInfoTextView);
+
+        menuLinearLayout = menuHeaderView.findViewById(R.id.menuLinearLayout);
+        //Giyim
+        dressesLinearLayout = menuHeaderView.findViewById(R.id.dressesLinearLayout);
+        headerDressMoreTextView = menuHeaderView.findViewById(R.id.dressMoreTextView);
+        headerDressBackTexView = menuHeaderView.findViewById(R.id.backDressesTextView);
+
+        //Collection
+        collectionLinearLayout = menuHeaderView.findViewById(R.id.collectionLinearLayout);
+        headerCollectionMoreTextView = menuHeaderView.findViewById(R.id.collectionMoreTextView);
+        headerCollectionBackTextView = menuHeaderView.findViewById(R.id.backCollectionTextView);
+        //INFO
+        ınfoLinearLayout = menuHeaderView.findViewById(R.id.ınfoLinearLayout);
+        headerBackTextView  = menuHeaderView.findViewById(R.id.backTextView);
+        ınfoLinearLayout.setVisibility(View.GONE);
+        collectionLinearLayout.setVisibility(View.GONE);
+        dressesLinearLayout.setVisibility(View.GONE);
+
+        //INFO
+        headerMenuInfoTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.GONE);
+                ınfoLinearLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        headerBackTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.VISIBLE);
+                ınfoLinearLayout.setVisibility(View.GONE);
+            }
+        });
+
+        //Collection
+        headerCollectionMoreTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.GONE);
+                collectionLinearLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        headerCollectionBackTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.VISIBLE);
+                collectionLinearLayout.setVisibility(View.GONE);
+            }
+        });
+        //Giyim
+
+        headerDressMoreTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.GONE);
+                dressesLinearLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        headerDressBackTexView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.VISIBLE);
+                dressesLinearLayout.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     @Override
@@ -336,7 +429,7 @@ public class LoginActivity extends AppCompatActivity implements tasarimInterface
 
 
     private void mainHubButton(){
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
     public void mainHubButton(View view){

@@ -1,14 +1,7 @@
-package com.muham.bamostmobileappv4;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+package com.muham.bamostmobileappv4.Account;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Person;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,19 +9,45 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.muham.bamostmobileappv4.MainActivity;
+import com.muham.bamostmobileappv4.R;
+import com.muham.bamostmobileappv4.tasarimInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity implements tasarimInterface {
+    TextView headerMenuInfoTextView;
+    TextView headerBackTextView;
+    private NavigationView menuNavigationView;
+
+    LinearLayout menuLinearLayout;
+    LinearLayout ınfoLinearLayout;
+    LinearLayout collectionLinearLayout;
+    LinearLayout dressesLinearLayout;
+    //
+    //Koleksiyon
+    TextView headerCollectionMoreTextView;
+    TextView headerCollectionBackTextView;
+
+    // Giyim
+    TextView headerDressMoreTextView;
+    TextView headerDressBackTexView;
     private View line1, line2, line3;
     private View x;
 
@@ -84,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity implements tasarimInterf
         editEmailText = findViewById(R.id.editEmailText);
         editPasswordText = findViewById(R.id.editPasswordText);
 
-        editNameText = findViewById(R.id.editNameText);
+        editNameText = findViewById(R.id.editUpdateNameText);
         editSurNameText = findViewById(R.id.editSurNameText);
 
         textLoginView = findViewById(R.id.textLoginView);
@@ -92,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity implements tasarimInterf
         onInheritCreate();
     }
     @Override
-    public void menu() {
+    public void menu(){
         line1 = findViewById(R.id.line1);
         line2 = findViewById(R.id.line2);
         line3 = findViewById(R.id.line3);
@@ -104,9 +123,9 @@ public class RegisterActivity extends AppCompatActivity implements tasarimInterf
 
         menuviewScrollViewH = findViewById(R.id.mainviewLoginScrollView);
 
-        menuDrawerLayout = findViewById(R.id.drawerLayout);//öne atmak için hiyerarşi
+        menuDrawerLayout = findViewById(R.id.menuDrawerLayout);//öne atmak için hiyerari
 
-        drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout = findViewById(R.id.menuDrawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -119,6 +138,78 @@ public class RegisterActivity extends AppCompatActivity implements tasarimInterf
                 return true;
             }
         });
+
+        menuNavigationView = findViewById(R.id.tasarim_navigationview);
+
+        View menuHeaderView = menuNavigationView.getHeaderView(0);
+
+        headerMenuInfoTextView = menuHeaderView.findViewById(R.id.menuInfoTextView);
+
+        menuLinearLayout = menuHeaderView.findViewById(R.id.menuLinearLayout);
+        //Giyim
+        dressesLinearLayout = menuHeaderView.findViewById(R.id.dressesLinearLayout);
+        headerDressMoreTextView = menuHeaderView.findViewById(R.id.dressMoreTextView);
+        headerDressBackTexView = menuHeaderView.findViewById(R.id.backDressesTextView);
+
+        //Collection
+        collectionLinearLayout = menuHeaderView.findViewById(R.id.collectionLinearLayout);
+        headerCollectionMoreTextView = menuHeaderView.findViewById(R.id.collectionMoreTextView);
+        headerCollectionBackTextView = menuHeaderView.findViewById(R.id.backCollectionTextView);
+        //INFO
+        ınfoLinearLayout = menuHeaderView.findViewById(R.id.ınfoLinearLayout);
+        headerBackTextView  = menuHeaderView.findViewById(R.id.backTextView);
+        ınfoLinearLayout.setVisibility(View.GONE);
+        collectionLinearLayout.setVisibility(View.GONE);
+        dressesLinearLayout.setVisibility(View.GONE);
+
+        //INFO
+        headerMenuInfoTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.GONE);
+                ınfoLinearLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        headerBackTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.VISIBLE);
+                ınfoLinearLayout.setVisibility(View.GONE);
+            }
+        });
+
+        //Collection
+        headerCollectionMoreTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.GONE);
+                collectionLinearLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        headerCollectionBackTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.VISIBLE);
+                collectionLinearLayout.setVisibility(View.GONE);
+            }
+        });
+        //Giyim
+
+        headerDressMoreTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.GONE);
+                dressesLinearLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        headerDressBackTexView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuLinearLayout.setVisibility(View.VISIBLE);
+                dressesLinearLayout.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     @Override
@@ -296,11 +387,13 @@ public class RegisterActivity extends AppCompatActivity implements tasarimInterf
         String password = editPasswordText.getText().toString();
         String firstName = editNameText.getText().toString();
         String lastName = editSurNameText.getText().toString();
+        String number = "";
+        String address = "";
 
-        registerUser(email, password,firstName,lastName);
+        registerUser(email, password, firstName, lastName, number, address);
 
     }
-    private void registerUser(String email, String password, String firstName, String lastName ) {
+    private void registerUser(String email, String password, String firstName, String lastName, String number, String address) {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -309,7 +402,7 @@ public class RegisterActivity extends AppCompatActivity implements tasarimInterf
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         String userId = mAuth.getCurrentUser().getUid();
-                        Persons p = new Persons(userId, firstName, lastName, password, email);
+                        Persons p = new Persons(userId, firstName, lastName, password, email, number, address);
 
                         db.collection("Persons").document(userId).set(p);
 
@@ -327,11 +420,11 @@ public class RegisterActivity extends AppCompatActivity implements tasarimInterf
                     }
                 });
 
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
     public void mainHubButton(View view){
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -22,6 +23,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,7 +32,10 @@ import com.muham.bamostmobileappv4.MainActivity;
 import com.muham.bamostmobileappv4.R;
 import com.muham.bamostmobileappv4.tasarimInterface;
 
-public class AccountOrderActivity extends AppCompatActivity implements tasarimInterface, LoginListener {
+import java.util.HashMap;
+import java.util.Map;
+
+public class AccountDetailsActivity extends AppCompatActivity implements tasarimInterface, LoginListener {
     TextView headerMenuInfoTextView;
     TextView headerBackTextView;
     private NavigationView menuNavigationView;
@@ -87,18 +93,74 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
     TextView helloNameSurnameTextView;
     TextView mailTextView;
 
+    EditText editNameText;
+    EditText editSurnameText;
+    EditText editCallText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_order);
+        setContentView(R.layout.activity_account_details);
 
         favoriView = findViewById(R.id.imageViewFav);
 
-
+        editNameText = findViewById(R.id.editUpdateNameText);
+        editSurnameText = findViewById(R.id.editUpdateSurnameText);
+        editCallText = findViewById(R.id.editCallText);
 
         onInheritCreate();
     }
+    public void SaveButton(View view) {
+        // EditText'ten alınan verileri al
+        String name = editNameText.getText().toString();
+        String surname = editSurnameText.getText().toString();
+        String call = editCallText.getText().toString();
+
+        // Firebase kimlik doğrulaması için kullanıcıyı al
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference userRef = db.collection("Persons").document(userId);
+            DatabaseReference userSaveRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
+
+            // Firestore'dan mevcut kullanıcı verilerini al
+            userRef.get().addOnCompleteListener(userTask -> {
+                if (userTask.isSuccessful()) {
+                    DocumentSnapshot document = userTask.getResult();
+                    if (document.exists()) {
+                        //String firstName = document.getString("firstName"); no usages
+                        //String lastName = document.getString("lastName");
+                        //String number = document.getString("number");
+
+                        // Yeni verileri güncelle
+                        Map<String, Object> userMap = new HashMap<>();
+                        userMap.put("firstName", name);
+                        userMap.put("lastName", surname);
+                        userMap.put("number", call);
+
+                        // Firestore verilerini güncelle
+                        userRef.update(userMap).addOnCompleteListener(updateTask -> {
+                            if (updateTask.isSuccessful()) {
+                                // Firestore güncelleme başarılı
+                                Toast.makeText(this, "Bilgiler güncellendi", Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Firestore güncelleme hatası
+                                Toast.makeText(this, "Firestore Güncelleme Hatası: " + updateTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        // Realtime Database verilerini güncelle
+                        userSaveRef.updateChildren(userMap);
+                    }
+                }
+            });
+        }
+    }
+
     public void dbConnection(){
         helloNameSurnameTextView = findViewById(R.id.helloNameSurnameTextView);
         mailTextView = findViewById(R.id.mailtextView);
@@ -117,9 +179,13 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
                     String firstName = document.getString("firstName");
                     String lastName = document.getString("lastName");
                     String mail = document.getString("email");
+                    String number = document.getString("number");
 
                     helloNameSurnameTextView.setText("MERHABA " + firstName + " " + lastName);
                     mailTextView.setText(mail);
+                    editCallText.setText(number);
+                    editNameText.setText(firstName);
+                    editSurnameText.setText(lastName);
 
                 }
             }
@@ -130,8 +196,8 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
         Intent intent = new Intent(this,AccountAddressesActivity.class);
         startActivity(intent);
     }
-    public void buttonAccountDetails(View view){
-        Intent intent = new Intent(this,AccountDetailsActivity.class);
+    public void buttonOrders(View view){
+        Intent intent = new Intent(this,AccountOrderActivity.class);
         startActivity(intent);
     }
     public void buttonSignout(View view){

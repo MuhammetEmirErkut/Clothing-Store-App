@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".Account.RegisterActivity">
 
 
     <FrameLayout
@@ -72,14 +72,16 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">>
+                        app:layout_constraintTop_toTopOf="parent"><![CDATA[>
+
+                        ]]>
 
                         <TextView
                             android:id="@+id/textLoginView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/bebas_neue"
                             android:layout_marginTop="20dp"
+                            android:fontFamily="@font/bebas_neue"
                             android:text="KAYIT OL"
                             android:textColor="#000000"
                             android:textSize="24sp" />
@@ -92,7 +94,7 @@
                             android:orientation="horizontal">
 
                             <EditText
-                                android:id="@+id/editNameText"
+                                android:id="@+id/editUpdateNameText"
                                 android:layout_width="357dp"
                                 android:layout_height="87dp"
                                 android:layout_gravity="center"

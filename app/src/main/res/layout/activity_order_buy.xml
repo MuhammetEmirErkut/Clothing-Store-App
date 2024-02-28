@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    tools:ignore="ExtraText">
+    tools:context=".menuInfo.OrderBuy">
+
 
     <FrameLayout
-        android:id="@+id/containersLayout"
+        android:id="@+id/containersLoginLayout"
         android:layout_width="411dp"
         android:layout_height="700dp"
 
@@ -23,7 +23,7 @@
         <include
             layout="@layout/menu_drawerlayout"
             android:layout_width="409dp"
-            android:layout_height="671dp"
+            android:layout_height="641dp"
             android:layout_gravity="start"
             android:layout_marginTop="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,383 +51,203 @@
         <ScrollView
             android:id="@+id/mainviewLoginScrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" >
 
             <LinearLayout
-                android:id="@+id/sell50LoginLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/sell50"
-                    android:layout_width="812dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="#000000"
-                    android:fontFamily="@font/bebas_neue"
-                    android:gravity="center"
-                    android:text="%50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi     "
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="414dp">
-
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="711dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/uptosale"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/kesfetButton1"
-                        android:layout_width="match_parent"
-                        android:layout_height="63dp"
-                        android:backgroundTint="#F9F9F9"
-                        android:fontFamily="@font/bebas_neue"
-                        android:text="KEŞFET"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.849" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/sell51"
-                    android:layout_width="812dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginBottom="9dp"
-                    android:background="#000000"
-                    android:fontFamily="@font/bebas_neue"
-                    android:gravity="center"
-                    android:text="%50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi      %50'ye Varan Sezon Sonu İndirimi     "
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="414dp">
-
-                    <ImageView
-                        android:id="@+id/imageView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="711dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/essent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/kesfetButton2"
-                        android:layout_width="match_parent"
-                        android:layout_height="63dp"
-                        android:backgroundTint="#F9F9F9"
-                        android:fontFamily="@font/bebas_neue"
-                        android:text="KEŞFET"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.179"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.834" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <EditText
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginBottom="50dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:gravity="center"
-                    android:text="YENİLER"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-
-                    <ImageView
-                        android:id="@+id/imageView41"
-                        android:layout_width="wrap_content"
-                        android:layout_height="711dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/sweatshirt"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/kesfetButton3"
-                        android:layout_width="match_parent"
-                        android:layout_height="63dp"
-                        android:backgroundTint="#F9F9F9"
-                        android:fontFamily="@font/bebas_neue"
-                        android:text="KEŞFET"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.179"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.834" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="490dp">
-
-
-                    <ImageView
-                        android:id="@+id/actiWearImageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:src="@drawable/activewear"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/kesfetButton4"
-                        android:layout_width="match_parent"
-                        android:layout_height="63dp"
-                        android:backgroundTint="#F9F9F9"
-                        android:fontFamily="@font/bebas_neue"
-                        android:text="KEŞFET"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.179"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.834" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/textViewUyeOl"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="53dp"
-                    android:layout_marginBottom="13dp"
-                    android:layout_gravity="center"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:gravity="center"
-                    android:text="ÜYE OL %10 İNDİRİM KAZAN!"
-                    android:textColor="#27292B"
-                    android:textSize="20sp"></TextView>
-
-                <Button
-                    android:id="@+id/registerButton"
-                    android:layout_width="153dp"
-                    android:layout_height="56dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="53dp"
-                    android:backgroundTint="#A3A3A3"
-                    android:fontFamily="@font/bebas_neue"
-                    android:onClick="registerScreenActivity"
-                    android:text="KAYIT OL"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.179"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.834"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="2dp" />
-                <ImageView
-                    android:id="@+id/showRoomImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:src="@drawable/showroom"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="80dp"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:gravity="center"
-                    android:text="Pazartesi - Pazar (10:00 - 21:00)" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="25dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:gravity="center"
-                    android:text="BAMOST BEYKENT SHOWROOM"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
-                <Button
-                    android:id="@+id/adressButton"
-                    android:layout_width="231dp"
-                    android:layout_height="56dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="53dp"
-                    android:backgroundTint="#F9F9F9"
-                    android:fontFamily="@font/bebas_neue"
-                    android:onClick="adressScreenActivity"
-                    android:text="ADRESİ GÖRÜNTÜLE"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.179"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.834"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="2dp" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:background="#000000">
-
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textViewBulten2"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/OrderBuyUselessTextView"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:text="E-BÜLTENE KAYIT OL!"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp"
-                        app:layout_constraintBottom_toTopOf="@+id/textViewBulten"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginBottom="3dp"
+                        android:fontFamily="@font/bebas_neue"
+                        android:text="SİPARİŞ VE ÖDEME"
+                        android:textColor="#858585"
+                        android:textSize="29sp" />
 
-                    <TextView
-                        android:id="@+id/textViewBulten"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <View
+                        android:id="@+id/view12"
+                        android:layout_width="380dp"
+                        android:layout_height="2dp"
                         android:layout_gravity="center"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:text="E-Bültene kaydol. Yeni ürünleri ve kampanyaları kaçırma."
-                        android:textColor="#FFFFFF"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.458" />
+                        android:layout_marginBottom="21dp"
+                        android:background="#919191" />
 
                     <LinearLayout
-                        android:id="@+id/linearLayoutBulten"
-                        android:layout_width="319dp"
-                        android:layout_height="37dp"
+                        android:id="@+id/BuyChoiceLinearLayout"
+                        android:layout_width="380dp"
+                        android:layout_height="53dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/border_background"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewBulten">
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/softgray_background"
+                        android:orientation="horizontal">
 
-
-                        <EditText
-                            android:id="@+id/eBultenEditText2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="55dp"
-                            android:layout_gravity="center"
+                        <TextView
+                            android:id="@+id/BuyChoiceTextView"
+                            android:layout_width="301dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="9dp"
+                            android:layout_marginTop="19dp"
                             android:layout_weight="1"
-                            android:backgroundTint="#000000"
-                            android:ems="10"
-                            android:hint="Email"
-                            android:inputType="text"
-                            android:textColor="#FFFFFF"
-                            android:textColorHint="#9E9E9E" />
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="start"
+                            android:text="Ödeme seçenekleri nelerdir? \n\n-Tüm kredi ve banka kartlarıyla IkasPay aracılığıyla online olarak ödemenizi güvenli bir şekilde yapabilirsiniz. -Havale-EFT yoluyla siparişinizdeki toplam tutarı şirket hesabımıza havale ederek ödemenizi tamamlayabilirsiniz."
+                            android:textColor="#4C4C4C" />
 
-                        <Button
-                            android:id="@+id/registerButtonBu"
-                            android:layout_width="100dp"
-                            android:layout_height="35dp"
-                            android:layout_marginEnd="5dp"
-                            android:backgroundTint="#000000"
-                            android:fontFamily="@font/bebas_neue"
-                            android:onClick="registerScreenActivity"
-                            android:text="KAYIT OL"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/PlusTextView1"
+                            android:layout_width="107dp"
+                            android:layout_height="53dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="#000000"
+                            android:textSize="34sp" />
                     </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <LinearLayout
+                        android:id="@+id/MembershipLinearLayout"
+                        android:layout_width="380dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/softgray_background"
+                        android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/ınstaTextView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="Instagram Shop"
-                    android:textSize="16sp" />
-                <Button
-                    android:id="@+id/instaKesfetButton"
-                    android:layout_width="153dp"
-                    android:layout_height="56dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="53dp"
-                    android:backgroundTint="#A3A3A3"
-                    android:fontFamily="@font/bebas_neue"
-                    android:onClick="instaScreen"
-                    android:text="KEŞFET"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="2dp" />
+                        <TextView
+                            android:id="@+id/MembershipTextView"
+                            android:layout_width="301dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="9dp"
+                            android:layout_marginTop="19dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="start"
+                            android:text="Üye olmak zorunda mıyım? \n\nHayır, üye olmadan da web sitemizde dilediğiniz gibi sipariş oluşturabilirsiniz. Ancak üye olarak daha kolay ve hızlı alışveriş yapabilirsiniz.  Ayrıca üyelerimize özel sunduğumuz indirim ve kampanyaları da kaçırmamış olursunuz."
+                            android:textColor="#4C4C4C" />
+
+                        <TextView
+                            android:id="@+id/PlusTextView2"
+                            android:layout_width="107dp"
+                            android:layout_height="53dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="#000000"
+                            android:textSize="34sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/HirePurchaseLinearLayout"
+                        android:layout_width="380dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/softgray_background"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/HirePurchaseTextView"
+                            android:layout_width="301dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="9dp"
+                            android:layout_marginTop="19dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="start"
+                            android:text="Taksit imkanı var mı? \n\nWeb sitemizde online yaptığınız ödemeleri 12 aya kadar taksitlendirebilirsiniz."
+                            android:textColor="#4C4C4C" />
+
+                        <TextView
+                            android:id="@+id/PlusTextView3"
+                            android:layout_width="107dp"
+                            android:layout_height="53dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="#000000"
+                            android:textSize="34sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/OrderCancelLinearLayout"
+                        android:layout_width="380dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/softgray_background"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/OrderCancelTextView"
+                            android:layout_width="301dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="9dp"
+                            android:layout_marginTop="19dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="start"
+                            android:text="Siparişimi nasıl iptal ederim/düzenlerim? \n\nKargoya teslim edilene kadar siparşinizi iptal edebilirsiniz.  Siparişinizi iptal etmek için başında ''#'' bulunan sipariş numaranızı belirterek whatsapp destek hattımızla iletişime geçerek hızlıca siparişinizi iptal edebilirsiniz.  NOT: Kargoya teslim edilmiş siparişler iptal edilemez.  Sipariş güncellemeleriniz için de whatsapp destek hattımızla iletişime geçerek hızlıca işleminizi yapabilirsiniz."
+                            android:textColor="#4C4C4C" />
+
+                        <TextView
+                            android:id="@+id/PlusTextView4"
+                            android:layout_width="107dp"
+                            android:layout_height="53dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="#000000"
+                            android:textSize="34sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/CreditCardLinearLayout"
+                        android:layout_width="380dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="40dp"
+                        android:background="@drawable/softgray_background"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/CreditCardTextView"
+                            android:layout_width="301dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="9dp"
+                            android:layout_marginTop="19dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="start"
+                            android:text="Kredi kartı ile ödeme yapmak güvenli mi? \n\nOnline Ödeme altyapısı olarak tüm Türkiye'de kullanılan IkasPay ödeme sistemini kullanıyoruz.  SSL sertifikasıyla tüm kart bilgileriniz güvence altındadır. BAMOST hiç bir şekilde kredi kartı veya izin vermediğiniz kişisel bilgilerinizi göremez.  Tüm işlemler şifreli ve gizlenerek yapılmaktadır."
+                            android:textColor="#4C4C4C" />
+
+                        <TextView
+                            android:id="@+id/PlusTextView5"
+                            android:layout_width="107dp"
+                            android:layout_height="53dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="+"
+                            android:textColor="#000000"
+                            android:textSize="34sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="40dp"
                     android:background="#232323"
                     android:backgroundTint="#232323">
 
@@ -665,12 +485,10 @@
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </LinearLayout>
         </ScrollView>
 
     </FrameLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -698,6 +516,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout6"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:orientation="horizontal"
@@ -771,6 +590,7 @@
                 android:layout_width="135dp"
                 android:layout_height="match_parent"
                 android:background="#FEFEFE"
+                android:onClick="mainHubButton"
                 app:srcCompat="@drawable/bamostbasic" />
 
             <View
@@ -782,7 +602,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageViewFav"
@@ -793,13 +613,13 @@
                 app:srcCompat="@drawable/favori" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="45dp"
+                android:layout_width="38dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="#FCFCFC">
 
                 <ImageView
                     android:id="@+id/imageViewX"
-                    android:layout_width="45dp"
+                    android:layout_width="38dp"
                     android:layout_height="match_parent"
                     android:background="#FDFDFD"
                     android:backgroundTint="#FEFEFE"
@@ -811,7 +631,7 @@
 
                 <ImageView
                     android:id="@+id/imageViewSearch"
-                    android:layout_width="45dp"
+                    android:layout_width="38dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#FEFEFE"
@@ -824,7 +644,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/search" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
             <ImageView
                 android:id="@+id/imageViewAvatar"
@@ -850,5 +669,4 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

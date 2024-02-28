@@ -1,4 +1,4 @@
-package com.muham.bamostmobileappv4.Account;
+package com.muham.bamostmobileappv4.menuInfo;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -18,21 +18,39 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.muham.bamostmobileappv4.Account.LoginActivity;
+import com.muham.bamostmobileappv4.Account.LoginListener;
+import com.muham.bamostmobileappv4.Adapter.Dresses;
+import com.muham.bamostmobileappv4.Adapter.DressesAdapter;
 import com.muham.bamostmobileappv4.MainActivity;
 import com.muham.bamostmobileappv4.R;
 import com.muham.bamostmobileappv4.tasarimInterface;
 
-public class AccountOrderActivity extends AppCompatActivity implements tasarimInterface, LoginListener {
+import java.util.List;
+
+public class OrderTracking extends AppCompatActivity implements tasarimInterface , LoginListener {
+    //Menu
+    private View line1, line2, line3;
+    private View x;
+    TextView menuSellTextView;
+    TextView menuNewTextView;
+    TextView menuCollectionTextView;
+    TextView menuDressTextView;
+    //Info
     TextView headerMenuInfoTextView;
     TextView headerBackTextView;
     private NavigationView menuNavigationView;
+    TextView headerOrderTrackingTextView;
+    TextView headerWholeSaleTextView;
+    TextView headerComminicateTextView;
+    TextView headerCargoTextView;
+    TextView headerOrderBuyTextView;
+    TextView headerReturnExchangeTextView;
 
     LinearLayout menuLinearLayout;
     LinearLayout ınfoLinearLayout;
@@ -46,8 +64,6 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
     // Giyim
     TextView headerDressMoreTextView;
     TextView headerDressBackTexView;
-    private View line1, line2, line3;
-    private View x;
 
     private View searchX, search;
     private boolean isXShape = false;
@@ -82,99 +98,37 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
 
     View menuviewScrollViewH;
 
+    private TextView sell50;
+    private TextView sell51;
+
+    //TOOLBAR
+
+    // private View constraintLayout2;
+    //private Handler handler = new Handler();
+    //private Animation slideDown, slideUp;
+
+    //kıyafet yalandan
+    private RecyclerView recyclerView;
+    private DressesAdapter adapter;
+    private List<Dresses> dressesList;
+    //Fav
     ImageView favoriView;
-
-    TextView helloNameSurnameTextView;
-    TextView mailTextView;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_order);
+        setContentView(R.layout.activity_order_tracking);
+
 
         favoriView = findViewById(R.id.imageViewFav);
-
-
-
+        favoriView.setVisibility(View.GONE);
+        onLogin();
         onInheritCreate();
     }
-    public void dbConnection(){
-        helloNameSurnameTextView = findViewById(R.id.helloNameSurnameTextView);
-        mailTextView = findViewById(R.id.mailtextView);
-
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String userId = mAuth.getCurrentUser().getUid();
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference userRef = db.collection("Persons").document(userId);
-
-        userRef.get().addOnCompleteListener(userTask -> {
-            if (userTask.isSuccessful()) {
-                DocumentSnapshot document = userTask.getResult();
-                if (document.exists()) {
-                    // Firestore'dan verileri alın
-                    String firstName = document.getString("firstName");
-                    String lastName = document.getString("lastName");
-                    String mail = document.getString("email");
-
-                    helloNameSurnameTextView.setText("MERHABA " + firstName + " " + lastName);
-                    mailTextView.setText(mail);
-
-                }
-            }
-        });
-
-    }
-    public void buttonAdresses(View view){
-        Intent intent = new Intent(this,AccountAddressesActivity.class);
-        startActivity(intent);
-    }
-    public void buttonAccountDetails(View view){
-        Intent intent = new Intent(this,AccountDetailsActivity.class);
-        startActivity(intent);
-    }
-    public void buttonSignout(View view){
-        // Ana iş parçacığını dondurmamak için çıkış işlemini arka plan iş parçacığında yapın
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                FirebaseAuth.getInstance().signOut();
-
-                // Ana iş parçacığına geri dön ve UI güncellemelerini yap
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Favori düğmesini gizle veya diğer UI güncellemelerini yap
-                        favoriView.setVisibility(View.GONE);
-                    }
-                });
-            }
-        }).start();
-        mainHubButton();
-    }
-
-
-
-    @Override
-    public void onLogin() {
-        // Kullanıcı giriş yaptığında burası çalışır
-        // Favori butonunu görünür yapabilirsiniz
-        super.onStart();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if (currentUser != null) {
-            // Kullanıcı oturum açmışsa favori butonunu görünür yap
-            favoriView.setVisibility(View.VISIBLE);
-        } else {
-            // Kullanıcı oturum açmamışsa favori butonunu gizle
-            favoriView.setVisibility(View.GONE);
-        }
-    }
-
     @Override
     public void menu(){
+        sell50 = findViewById(R.id.sell50);
+        sell51 = findViewById(R.id.sell51);
+
         line1 = findViewById(R.id.line1);
         line2 = findViewById(R.id.line2);
         line3 = findViewById(R.id.line3);
@@ -218,12 +172,20 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
         collectionLinearLayout = menuHeaderView.findViewById(R.id.collectionLinearLayout);
         headerCollectionMoreTextView = menuHeaderView.findViewById(R.id.collectionMoreTextView);
         headerCollectionBackTextView = menuHeaderView.findViewById(R.id.backCollectionTextView);
+
         //INFO
         ınfoLinearLayout = menuHeaderView.findViewById(R.id.ınfoLinearLayout);
         headerBackTextView  = menuHeaderView.findViewById(R.id.backTextView);
+        headerOrderTrackingTextView = menuHeaderView.findViewById(R.id.ınfoOrderTrackingTextView);
+        headerWholeSaleTextView = menuHeaderView.findViewById(R.id.ınfoWholeSaleTexView);
+        headerComminicateTextView = menuHeaderView.findViewById(R.id.ınfoComminicateTextView);
+        headerCargoTextView = menuHeaderView.findViewById(R.id.ınfoCargoTextView);
+        headerOrderBuyTextView = menuHeaderView.findViewById(R.id.ınfoOrderBuyTextView);
+        headerReturnExchangeTextView = menuHeaderView.findViewById(R.id.ınfoReturnExchangeTextView);
         ınfoLinearLayout.setVisibility(View.GONE);
         collectionLinearLayout.setVisibility(View.GONE);
         dressesLinearLayout.setVisibility(View.GONE);
+
 
         //INFO
         headerMenuInfoTextView.setOnClickListener(new View.OnClickListener() {
@@ -238,6 +200,47 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
             public void onClick(View view) {
                 menuLinearLayout.setVisibility(View.VISIBLE);
                 ınfoLinearLayout.setVisibility(View.GONE);
+            }
+        });
+        headerOrderTrackingTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
+        headerWholeSaleTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderTracking.this, WholeSale.class);
+                startActivity(intent);
+            }
+        });
+        headerComminicateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderTracking.this, Comminicate.class);
+                startActivity(intent);
+            }
+        });
+        headerCargoTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderTracking.this, Cargo.class);
+                startActivity(intent);
+            }
+        });
+        headerOrderBuyTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderTracking.this, OrderBuy.class);
+                startActivity(intent);
+            }
+        });
+        headerReturnExchangeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderTracking.this, ReturnExchange.class);
+                startActivity(intent);
             }
         });
 
@@ -256,6 +259,7 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
                 collectionLinearLayout.setVisibility(View.GONE);
             }
         });
+
         //Giyim
 
         headerDressMoreTextView.setOnClickListener(new View.OnClickListener() {
@@ -327,7 +331,6 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
         menu();
         search();
         cart();
-        dbConnection();
     }
 
     public void cartBackButton(View view) {
@@ -429,8 +432,8 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
 
     @Override
     public void avatar(View view) {
-        // Intent intent = new Intent(this, LoginActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -446,12 +449,24 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
         }
         isXShapeForCart =  !isXShapeForCart;
     }
-    private void mainHubButton(){
+    public void mainHubButton(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-    public void mainHubButton(View view){
-        mainHubButton();
-    }
+    @Override
+    public void onLogin() {
+        // Kullanıcı giriş yaptığında burası çalışır
+        // Favori butonunu görünür yapabilirsiniz
+        super.onStart();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        if (currentUser != null) {
+            // Kullanıcı oturum açmışsa favori butonunu görünür yap
+            favoriView.setVisibility(View.VISIBLE);
+        } else {
+            // Kullanıcı oturum açmamışsa favori butonunu gizle
+            favoriView.setVisibility(View.GONE);
+        }
+    }
 }

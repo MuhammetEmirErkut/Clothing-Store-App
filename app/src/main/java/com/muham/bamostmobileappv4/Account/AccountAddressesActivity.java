@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,24 +13,41 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.muham.bamostmobileappv4.Account.Adapter.AddressAdapter;
+import com.muham.bamostmobileappv4.Account.Addresses.Address;
 import com.muham.bamostmobileappv4.MainActivity;
 import com.muham.bamostmobileappv4.R;
 import com.muham.bamostmobileappv4.tasarimInterface;
 
-public class AccountOrderActivity extends AppCompatActivity implements tasarimInterface, LoginListener {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class AccountAddressesActivity extends AppCompatActivity implements tasarimInterface, LoginListener {
     TextView headerMenuInfoTextView;
     TextView headerBackTextView;
     private NavigationView menuNavigationView;
@@ -84,21 +102,179 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
 
     ImageView favoriView;
 
+    View newAddressLayout;
+
+    View newAddressButtonLayout;
     TextView helloNameSurnameTextView;
     TextView mailTextView;
 
+    //adres
+    EditText editAddressTitleText;
+    EditText editNameText;
+    EditText editSurnameText;
+    EditText editAddressText;
+    EditText editApartmentText;
+    EditText editCityText;
+    EditText editSemtText;
+    EditText editNumberText;
+    private TextView deleteHeader;
+    private TextView changeHeader;
+
+    private List<Address> addressesList;
+    private AddressAdapter adapter;
+    private RecyclerView addressesRecyclerView;
+    private Layout address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_order);
+        setContentView(R.layout.activity_account_addresses);
 
         favoriView = findViewById(R.id.imageViewFav);
 
+        newAddressLayout = findViewById(R.id.changeAddressLayout);
+        newAddressLayout.setVisibility(View.GONE);
 
+        newAddressButtonLayout = findViewById(R.id.newAddressButtonLayout);
+        controlAddresses();
 
         onInheritCreate();
     }
+
+    public void SaveButton(View view) {
+        //Adres
+        editAddressTitleText = findViewById(R.id.editAddressTitleText);
+        editNameText = findViewById(R.id.editNameText);
+        editSurnameText = findViewById(R.id.editSurnameText);
+        editAddressText = findViewById(R.id.editAddressText);
+        editApartmentText = findViewById(R.id.editApartmentText);
+        editCityText = findViewById(R.id.editCityText);
+        editSemtText = findViewById(R.id.editSemtText);
+        editNumberText = findViewById(R.id.editNumberText);
+        //
+        String addressTitle = editAddressTitleText.getText().toString();
+        String name = editNameText.getText().toString();
+        String surname = editSurnameText.getText().toString();
+        String address = editAddressText.getText().toString();
+        String apartment = editApartmentText.getText().toString();
+        String city = editCityText.getText().toString();
+        String semt = editSemtText.getText().toString();
+        String number = editNumberText.getText().toString();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        String userId = currentUser.getUid();
+
+        if (currentUser != null) {
+            CollectionReference adresKoleksiyonu = db.collection("Persons").document(userId).collection("adresler");
+            Map<String, Object> adresInfo = new HashMap<>();
+
+            adresInfo.put("addressTitle", addressTitle);
+            adresInfo.put("name", name);
+            adresInfo.put("surname", surname);
+            adresInfo.put("address", address);
+            adresInfo.put("apartment", apartment);
+            adresInfo.put("city", city);
+            adresInfo.put("semt", semt);
+            adresInfo.put("number", number);
+
+            adresKoleksiyonu.add(adresInfo)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            String addressId = documentReference.getId();
+                            String nameSurnameTextView = name + " " + surname;
+                            String titleTextView = addressTitle;
+                            String addressAdapterTextView = address + " " + apartment + " " + semt + " " + city;
+                            String cityCountryTextView = city;
+
+                            CollectionReference adresKoleksiyonu = db.collection("Persons").document(userId).collection("adresler");
+                            Map<String, Object> adresInfo = new HashMap<>();
+                            DocumentReference belgeReferansi = adresKoleksiyonu.document(addressId);
+
+                            adresInfo.put("addressId", addressId);
+
+                            belgeReferansi.update(adresInfo);
+
+                            if (addressesList != null) {
+                                addressesList.add(new Address(addressId, nameSurnameTextView, titleTextView, addressAdapterTextView, cityCountryTextView));
+                                adapter.notifyDataSetChanged(); // RecyclerView'i güncelleyin
+                                System.out.println("21"+addressesList.get(0).getAddressId());
+                            }
+
+                            // Adres başarıyla Firestore'a eklendi, diğer işlemleri burada yapabilirsiniz.
+                            Toast.makeText(AccountAddressesActivity.this, "Kayıt başarılı", Toast.LENGTH_SHORT).show();
+                            newAddressLayout.setVisibility(View.GONE);
+                            newAddressButtonLayout.setVisibility(View.VISIBLE);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Kayıt başarısız olduğunda burada işlemleri yapabilirsiniz.
+                            Toast.makeText(AccountAddressesActivity.this, "Kayıt başarısız", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    public void controlAddresses() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        addressesRecyclerView = findViewById(R.id.addressesRecyclerView);
+        addressesRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        addressesRecyclerView.setVisibility(View.GONE);
+
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+
+            CollectionReference adresKoleksiyonu = db.collection("Persons").document(userId).collection("adresler");
+
+            adresKoleksiyonu.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        boolean adresBulundu = false;
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Her bir adres belgesini kontrol edin
+                            // Eğer aradığınız adres bilgisini burada bulursanız adresBulundu değişkenini true yapabilirsiniz
+                            // Örneğin, belirli bir adres adını kontrol edebilirsiniz
+                            addressesRecyclerView.setVisibility(View.VISIBLE);
+
+                            String addressId = document.getString("addressId");//Hatayı düzelt
+                            String nameSurnameTextView = document.getString("name") + " " + document.getString("surname");
+                            String titleTextView = document.getString("addressTitle");
+                            String addressAdapterTextView = document.getString("address") + " " + document.getString("apartment") + " " + document.getString("semt") + " " + document.getString("city");
+                            String cityCountryTextView = document.getString("city");
+
+                            if (addressesList != null) {
+                                addressesList.add(new Address(addressId, nameSurnameTextView, titleTextView, addressAdapterTextView, cityCountryTextView));
+                            } else {
+                                // Eğer addressesList null ise, uygun bir şekilde başlatılması gerekir.
+                                addressesList = new ArrayList<Address>();
+                                addressesList.add(new Address(addressId, nameSurnameTextView, titleTextView, addressAdapterTextView, cityCountryTextView));
+                            }
+
+                            adapter = new AddressAdapter(AccountAddressesActivity.this, addressesList);
+                            addressesRecyclerView.setAdapter(adapter);
+                        }
+
+                        if (!adresBulundu) {
+                            Toast.makeText(AccountAddressesActivity.this, "Adres bulunamadı yeni adres ekleyin.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(AccountAddressesActivity.this, "Sorgu başarısız", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
     public void dbConnection(){
         helloNameSurnameTextView = findViewById(R.id.helloNameSurnameTextView);
         mailTextView = findViewById(R.id.mailtextView);
@@ -126,8 +302,16 @@ public class AccountOrderActivity extends AppCompatActivity implements tasarimIn
         });
 
     }
-    public void buttonAdresses(View view){
-        Intent intent = new Intent(this,AccountAddressesActivity.class);
+    public void newAddressButton(View view){
+        newAddressButtonLayout.setVisibility(View.GONE);
+        newAddressLayout.setVisibility(View.VISIBLE);
+    }
+    public void CancelButton(View view){
+        newAddressButtonLayout.setVisibility(View.VISIBLE);
+        newAddressLayout.setVisibility(View.GONE);
+    }
+    public void buttonOrders(View view){
+        Intent intent = new Intent(this,AccountOrderActivity.class);
         startActivity(intent);
     }
     public void buttonAccountDetails(View view){

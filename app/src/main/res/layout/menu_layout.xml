@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="731dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/menuLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/menuSellTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="INDIRIM"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/menuNewTexView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="YENILER"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/menuCollectionTextView"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="KOLEKSIYON"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/collectionMoreTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/bebas_neue"
+                    android:gravity="center"
+                    android:text=">"
+                    android:textSize="40sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/menuDressTexView"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="GIYIM"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/dressMoreTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/bebas_neue"
+                    android:gravity="center"
+                    android:text=">"
+                    android:textSize="40sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/menuInfoTextView"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:text="BILGI"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dressesLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/backDressesTextView"
+                    android:layout_width="37dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/bebas_neue"
+                    android:gravity="center"
+                    android:text="&lt;"
+                    android:textColor="#000000"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:id="@+id/dressesTextView"
+                    android:layout_width="328dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="39dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:gravity="center"
+                    android:text="GİYİM"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view54"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesUselessTexView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Kategoriler"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/dressesAllTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Tğm ürünler"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view53"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesTshirtTexView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="TSHIRT"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view55"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesShortTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="short"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view49"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesOutDoorTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="dış giyim"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view91"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesSweatShirtTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="sweatshırt"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view52"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesPantTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="pantolon"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view60"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesBasicTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="BASIC"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view65"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesMostOrderTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Çok satanlar"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view111"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesSockTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Çorap"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view112"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesHatTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Şapka"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view113"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesLeggingsTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="tayt"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view114"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/dressesTopAndBottomTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Alt üst takım"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view115"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ınfoLinearLayout"
+            android:layout_width="409dp"
+            android:layout_height="730dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/backTextView"
+                    android:layout_width="37dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/bebas_neue"
+                    android:gravity="center"
+                    android:text="&lt;"
+                    android:textColor="#000000"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:id="@+id/ınfoTextView"
+                    android:layout_width="328dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="39dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:gravity="center"
+                    android:text="BİLGİ"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view88"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/ınfoUselessTexView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Bilgi"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/ınfoOrderTrackingTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Sipariş takibi"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view68"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/ınfoWholeSaleTexView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Toptan satış"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view58"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/ınfoComminicateTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="İletişim"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view48"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/ınfoCargoTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Teslimat ve kargo"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/ınfoOrderBuyTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Sipariş ve ödeme"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view10"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/ınfoReturnExchangeTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="İade ve değişim"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view11"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/collectionLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/backCollectionTextView"
+                    android:layout_width="37dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/bebas_neue"
+                    android:gravity="center"
+                    android:text="&lt;"
+                    android:textColor="#000000"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:id="@+id/collectionTextView"
+                    android:layout_width="328dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="39dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/bebas_neue"
+                    android:gravity="center"
+                    android:text="Koleksiyon"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view514"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/collectionUselessTexView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Tüm koleksiyonlar"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/collectionVisionTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="VISION'24 COLLECTION"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view513"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/collectionDesignTexView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="DESIgn studıo 2023"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view515"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/collection90TextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="90's club"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view419"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/collectionPerspectiveTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Perspective'23"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view911"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/collectionOldsTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="OLDS CLUB"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view512"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/collectionKadınTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="KADIN actıvewear"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view610"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+
+            <TextView
+                android:id="@+id/collectionOwenTextView"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/bebas_neue"
+                android:text="Owen serıes"
+                android:textColor="#686868"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/view615"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#DCDCDC" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

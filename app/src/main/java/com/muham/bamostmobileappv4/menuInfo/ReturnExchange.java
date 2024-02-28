@@ -1,13 +1,11 @@
-package com.muham.bamostmobileappv4;
+package com.muham.bamostmobileappv4.menuInfo;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,30 +18,22 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.muham.bamostmobileappv4.Account.AccountOrderActivity;
 import com.muham.bamostmobileappv4.Account.LoginActivity;
 import com.muham.bamostmobileappv4.Account.LoginListener;
 import com.muham.bamostmobileappv4.Adapter.Dresses;
 import com.muham.bamostmobileappv4.Adapter.DressesAdapter;
-import com.muham.bamostmobileappv4.DressListAdapter.DressList;
-import com.muham.bamostmobileappv4.menuInfo.Cargo;
-import com.muham.bamostmobileappv4.menuInfo.Comminicate;
-import com.muham.bamostmobileappv4.menuInfo.OrderBuy;
-import com.muham.bamostmobileappv4.menuInfo.OrderTracking;
-import com.muham.bamostmobileappv4.menuInfo.ReturnExchange;
-import com.muham.bamostmobileappv4.menuInfo.WholeSale;
+import com.muham.bamostmobileappv4.MainActivity;
+import com.muham.bamostmobileappv4.R;
+import com.muham.bamostmobileappv4.tasarimInterface;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements tasarimInterface, LoginListener {
+public class ReturnExchange extends AppCompatActivity implements tasarimInterface , LoginListener {
     //Menu
     private View line1, line2, line3;
     private View x;
@@ -61,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
     TextView headerCargoTextView;
     TextView headerOrderBuyTextView;
     TextView headerReturnExchangeTextView;
-    //
+
     LinearLayout menuLinearLayout;
     LinearLayout ınfoLinearLayout;
     LinearLayout collectionLinearLayout;
@@ -74,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
     // Giyim
     TextView headerDressMoreTextView;
     TextView headerDressBackTexView;
-    // Yeniler
-    TextView headerMenuNewTexView;
 
     private View searchX, search;
     private boolean isXShape = false;
@@ -106,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
 
     View searchDrawerLayoutH;
 
-    View cartDrawerLayoutH;//Hİyerarşi
+    View cartDrawerLayoutH;//Hİyerarşinin H si
 
     View menuviewScrollViewH;
 
@@ -119,42 +107,287 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
     //private Handler handler = new Handler();
     //private Animation slideDown, slideUp;
 
+    //kıyafet yalandan
     private RecyclerView recyclerView;
     private DressesAdapter adapter;
     private List<Dresses> dressesList;
     //Fav
     ImageView favoriView;
 
+    //Return Exchange
+
+    private boolean isPlus1 = false;
+    private boolean isPlus2 = false;
+    private boolean isPlus3 = false;
+    private boolean isPlus4 = false;
+    private boolean isPlus5 = false;
+    private boolean isPlus6 = false;
+    private boolean isPlus7 = false;
+    private boolean isPlus8 = false;
+    private boolean isPlus9 = false;
+
+
+    TextView PlusTextView1;
+    LinearLayout ReturnExchangeProvisoLinearLayout;
+
+    TextView PlusTextView2;
+    LinearLayout ReturnLinearLayout;
+
+    TextView PlusTextView3;
+    LinearLayout ExchangeLinearLayout;
+
+    TextView PlusTextView4;
+    LinearLayout ReturnExchangeCargoPaymentLinearLayout;
+
+    TextView PlusTextView5;
+    LinearLayout ReturnExchangeTimeLinearLayout;
+    TextView PlusTextView6;
+    LinearLayout ReturnConditionLinearLayout;
+    TextView PlusTextView7;
+    LinearLayout ReturnExchangeCargoLinearLayout;
+    TextView PlusTextView8;
+    LinearLayout ReturnCargoAddressLinearLayout;
+    TextView PlusTextView9;
+    LinearLayout ReturnExchangeHowCargoLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_return_exchange);
+
 
         favoriView = findViewById(R.id.imageViewFav);
         favoriView.setVisibility(View.GONE);
         onLogin();
         onInheritCreate();
-
+        returnExchangeQuestions();
     }
-    public void onInheritCreate(){
+    public void returnExchangeQuestions(){
+        PlusTextView1 = findViewById(R.id.PlusTextView1);
+        ReturnExchangeProvisoLinearLayout = findViewById(R.id.ReturnExchangeProvisoLinearLayout);
+        PlusTextView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlus1 == false) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeProvisoLinearLayout.getLayoutParams();
+                    layoutParams.height = 510;
+                    ReturnExchangeProvisoLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView1.setTextSize(50);
+                    PlusTextView1.setText("-");
+                    isPlus1 = true;
+                }
+                else {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeProvisoLinearLayout.getLayoutParams();
+                    layoutParams.height = 140;
+                    ReturnExchangeProvisoLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView1.setTextSize(31);
+                    PlusTextView1.setText("+");
+                    isPlus1 = false;
+                }
+            }
+        });
 
-        menu();
-        search();
-        cart();
-        mainViewDresses();
+        ReturnLinearLayout = findViewById(R.id.ReturnLinearLayout);
+        PlusTextView2 = findViewById(R.id.PlusTextView2);
 
-        textAnim(sell50);
-        textAnim(sell51);
+        PlusTextView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlus2 == false) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnLinearLayout.getLayoutParams();
+                    layoutParams.height = 730;
+                    ReturnLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView2.setTextSize(50);
+                    PlusTextView2.setText("-");
+                    isPlus2 = true;
+                }
+                else {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnLinearLayout.getLayoutParams();
+                    layoutParams.height = 140;
+                    ReturnLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView2.setTextSize(31);
+                    PlusTextView2.setText("+");
+                    isPlus2 = false;
+                }
+            }
+        });
 
+        ExchangeLinearLayout = findViewById(R.id.ExchangeLinearLayout);
+        PlusTextView3 = findViewById(R.id.PlusTextView3);
+
+        PlusTextView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlus3 == false) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ExchangeLinearLayout.getLayoutParams();
+                    layoutParams.height = 685;
+                    ExchangeLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView3.setTextSize(50);
+                    PlusTextView3.setText("-");
+                    isPlus3 = true;
+                }
+                else {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ExchangeLinearLayout.getLayoutParams();
+                    layoutParams.height = 140;
+                    ExchangeLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView3.setTextSize(31);
+                    PlusTextView3.setText("+");
+                    isPlus3 = false;
+                }
+            }
+        });
+
+        ReturnExchangeCargoPaymentLinearLayout = findViewById(R.id.ReturnExchangeCargoPaymentLinearLayout);
+        PlusTextView4 = findViewById(R.id.PlusTextView4);
+
+        PlusTextView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlus4 == false) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeCargoPaymentLinearLayout.getLayoutParams();
+                    layoutParams.height = 350;
+                    ReturnExchangeCargoPaymentLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView4.setTextSize(50);
+                    PlusTextView4.setText("-");
+                    isPlus4 = true;
+                }
+                else {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeCargoPaymentLinearLayout.getLayoutParams();
+                    layoutParams.height = 140;
+                    ReturnExchangeCargoPaymentLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView4.setTextSize(31);
+                    PlusTextView4.setText("+");
+                    isPlus4 = false;
+                }
+            }
+        });
+
+        ReturnExchangeTimeLinearLayout = findViewById(R.id.ReturnExchangeTimeLinearLayout);
+        PlusTextView5 = findViewById(R.id.PlusTextView5);
+
+        PlusTextView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlus5 == false) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeTimeLinearLayout.getLayoutParams();
+                    layoutParams.height = 470;
+                    ReturnExchangeTimeLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView5.setTextSize(50);
+                    PlusTextView5.setText("-");
+                    isPlus5 = true;
+                }
+                else {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeTimeLinearLayout.getLayoutParams();
+                    layoutParams.height = 140;
+                    ReturnExchangeTimeLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView5.setTextSize(31);
+                    PlusTextView5.setText("+");
+                    isPlus5 = false;
+                }
+            }
+        });
+
+        ReturnConditionLinearLayout = findViewById(R.id.ReturnConditionLinearLayout);
+        PlusTextView6 = findViewById(R.id.PlusTextView6);
+
+        PlusTextView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlus6 == false) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnConditionLinearLayout.getLayoutParams();
+                    layoutParams.height = 520;
+                    ReturnConditionLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView6.setTextSize(50);
+                    PlusTextView6.setText("-");
+                    isPlus6 = true;
+                }
+                else {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnConditionLinearLayout.getLayoutParams();
+                    layoutParams.height = 140;
+                    ReturnConditionLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView6.setTextSize(31);
+                    PlusTextView6.setText("+");
+                    isPlus6 = false;
+                }
+            }
+        });
+
+        ReturnExchangeCargoLinearLayout = findViewById(R.id.ReturnExchangeCargoLinearLayout);
+        PlusTextView7 = findViewById(R.id.PlusTextView7);
+
+        PlusTextView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlus7 == false) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeCargoLinearLayout.getLayoutParams();
+                    layoutParams.height = 470;
+                    ReturnExchangeCargoLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView7.setTextSize(50);
+                    PlusTextView7.setText("-");
+                    isPlus7 = true;
+                }
+                else {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeCargoLinearLayout.getLayoutParams();
+                    layoutParams.height = 140;
+                    ReturnExchangeCargoLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView7.setTextSize(31);
+                    PlusTextView7.setText("+");
+                    isPlus7 = false;
+                }
+            }
+        });
+
+        ReturnCargoAddressLinearLayout = findViewById(R.id.ReturnCargoAddressLinearLayout);
+        PlusTextView8 = findViewById(R.id.PlusTextView8);
+
+        PlusTextView8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlus8 == false) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnCargoAddressLinearLayout.getLayoutParams();
+                    layoutParams.height = 410;
+                    ReturnCargoAddressLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView8.setTextSize(50);
+                    PlusTextView8.setText("-");
+                    isPlus8 = true;
+                }
+                else {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnCargoAddressLinearLayout.getLayoutParams();
+                    layoutParams.height = 140;
+                    ReturnCargoAddressLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView8.setTextSize(31);
+                    PlusTextView8.setText("+");
+                    isPlus8 = false;
+                }
+            }
+        });
+
+        ReturnExchangeHowCargoLinearLayout = findViewById(R.id.ReturnExchangeHowCargoLinearLayout);
+        PlusTextView9 = findViewById(R.id.PlusTextView9);
+
+        PlusTextView9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlus9 == false) {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeHowCargoLinearLayout.getLayoutParams();
+                    layoutParams.height = 410;
+                    ReturnExchangeHowCargoLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView9.setTextSize(50);
+                    PlusTextView9.setText("-");
+                    isPlus9 = true;
+                }
+                else {
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ReturnExchangeHowCargoLinearLayout.getLayoutParams();
+                    layoutParams.height = 140;
+                    ReturnExchangeHowCargoLinearLayout.setLayoutParams(layoutParams);
+                    PlusTextView9.setTextSize(31);
+                    PlusTextView9.setText("+");
+                    isPlus9 = false;
+                }
+            }
+        });
     }
-    public void adressScreenActivity(View view){
-
-        String url = "https://www.google.com/maps/place/BAMOST+BEYKENT+SHOWROOM/@41.0068407,28.6251377,15z/data=!4m6!3m5!1s0x14cabbdbf2dabacf:0xc2cd531bd29619a!8m2!3d41.0068407!4d28.6251377!16s%2Fg%2F11h_kvw_mv?hl=tr&shorturl=1"; // Açmak istediğiniz web sitesinin URL'si
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(intent);
-
-    }
+    @Override
     public void menu(){
         sell50 = findViewById(R.id.sell50);
         sell51 = findViewById(R.id.sell51);
@@ -170,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
 
         menuviewScrollViewH = findViewById(R.id.mainviewLoginScrollView);
 
-        menuDrawerLayout = findViewById(R.id.menuDrawerLayout);
+        menuDrawerLayout = findViewById(R.id.menuDrawerLayout);//öne atmak için hiyerari
 
         drawerLayout = findViewById(R.id.menuDrawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -216,10 +449,6 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
         collectionLinearLayout.setVisibility(View.GONE);
         dressesLinearLayout.setVisibility(View.GONE);
 
-        //Yeniler
-
-        headerMenuNewTexView = menuHeaderView.findViewById(R.id.menuNewTexView);
-
 
         //INFO
         headerMenuInfoTextView.setOnClickListener(new View.OnClickListener() {
@@ -239,43 +468,42 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
         headerOrderTrackingTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, OrderTracking.class);
+                Intent intent = new Intent(ReturnExchange.this, OrderTracking.class);
                 startActivity(intent);
             }
         });
         headerWholeSaleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, WholeSale.class);
+                Intent intent = new Intent(ReturnExchange.this, WholeSale.class);
                 startActivity(intent);
             }
         });
         headerComminicateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Comminicate.class);
+                Intent intent = new Intent(ReturnExchange.this, Comminicate.class);
                 startActivity(intent);
             }
         });
         headerCargoTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Cargo.class);
+                Intent intent = new Intent(ReturnExchange.this, Cargo.class);
                 startActivity(intent);
             }
         });
         headerOrderBuyTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, OrderBuy.class);
+                Intent intent = new Intent(ReturnExchange.this, OrderBuy.class);
                 startActivity(intent);
             }
         });
         headerReturnExchangeTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ReturnExchange.class);
-                startActivity(intent);
+                drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
@@ -312,18 +540,10 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
             }
         });
 
-        //Yeniler
+    }
 
-        headerMenuNewTexView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DressList.class);
-                startActivity(intent);
-            }
-        });
-
-    }//imple
-    public void search(){
+    @Override
+    public void search() {
         searchDrawerLayoutH = findViewById(R.id.searchDrawerLayout);//öne atmak için hiyerarşi
 
         searchDrawerLayout = findViewById(R.id.searchDrawerLayout);
@@ -351,8 +571,10 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
                 // EditText tıklandığında yapılacak işlemler
             }
         });
-    }//imple
-    public void cart(){
+    }
+
+    @Override
+    public void cart() {
         cartDrawerLayoutH = findViewById(R.id.cartDrawerLayout);
 
         cartDrawerLayout = findViewById(R.id.cartDrawerLayout);
@@ -364,44 +586,16 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
 
         headerCartBackButton1 = findViewById(R.id.headerCartBack1);
         headerCartBackButton2 = findViewById(R.id.headerCartBack2);
-    }//imple
-    private void mainViewDresses(){
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        dressesList = new ArrayList<>();
-        dressesList.add(new Dresses(R.layout.dress, R.drawable.dress1, "Aris Kolej Ceket - SİYAH", 1.999));
-        dressesList.add(new Dresses(R.layout.dress, R.drawable.dress2, "Flow - Desenli Denim Şapka", 299.99));
-        dressesList.add(new Dresses(R.layout.dress, R.drawable.dress3, "Kane - Kolsuz T-Shirt - SİYAH", 278.99));
-        // Diğer elbiseleri eklemeye devam edebilirsiniz.
-
-        adapter = new DressesAdapter(this, dressesList);
-        recyclerView.setAdapter(adapter);
     }
-    public void textAnim(View view){
-        ViewTreeObserver vto = view.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                float textWidth = view.getWidth();
 
-                // TextView'ı sürekli sola doğru kaydıran animasyon
-                ObjectAnimator scrollAnimator = ObjectAnimator.ofFloat(
-                        view,
-                        "translationX",
-                        0f,
-                        -530f
-                );
-                scrollAnimator.setDuration(5000); // 5 saniye süreyle animasyonu çalıştır
-                scrollAnimator.setInterpolator(null); // Interpolatörü null yaparak sabit hızda kaydırma
-                scrollAnimator.setRepeatCount(ObjectAnimator.INFINITE); // Sonsuz tekrarla
-                scrollAnimator.start();
-
-                // ViewTreeObserver'ı kaldır
-                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });
+    @Override
+    public void onInheritCreate() {
+        menu();
+        search();
+        cart();
     }
+
     public void cartBackButton(View view) {
         cartDrawerLayout.bringToFront();
         cartDrawerLayout.closeDrawer(GravityCompat.END);
@@ -501,18 +695,8 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
 
     @Override
     public void avatar(View view) {
-        super.onStart();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if (currentUser != null) {
-            Intent intent = new Intent(this, AccountOrderActivity.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
-
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -527,6 +711,10 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
             cartDrawerLayout.openDrawer(GravityCompat.END);
         }
         isXShapeForCart =  !isXShapeForCart;
+    }
+    public void mainHubButton(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
     @Override
     public void onLogin() {
@@ -544,12 +732,4 @@ public class MainActivity extends AppCompatActivity implements tasarimInterface,
             favoriView.setVisibility(View.GONE);
         }
     }
-    public void buttonSignout(View view){
-        // Çıkış işlemi
-        FirebaseAuth.getInstance().signOut();
-
-        // Favori düğmesini gizle
-        favoriView.setVisibility(View.GONE);
-    }
-
 }

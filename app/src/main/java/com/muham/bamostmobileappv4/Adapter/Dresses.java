@@ -1,4 +1,4 @@
-package com.muham.bamostmobileappv4;
+package com.muham.bamostmobileappv4.Adapter;
 
 public class Dresses {
     private int layout;
