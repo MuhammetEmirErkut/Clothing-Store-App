@@ -30,4 +30,5 @@ I made this screen using scrollview. It contains some animated textViews and lay
 
 <h3 align="center">Design of the section related to Account.</h3>
 
-<h3 align="center"><img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/781ba5a3-8909-4452-b6f9-1fdde8ead32a" alt="Açıklama" height="400" width="200"></h3>
+<h3 align="center"><img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/238cfe9f-065f-4a39-92e9-460b20c00ccd" alt="Açıklama" height="400" width="200"></h3>
+
