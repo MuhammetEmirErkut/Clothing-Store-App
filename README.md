@@ -20,9 +20,10 @@ I made this screen using scrollview. It contains some animated textViews and lay
 <h3 align="center"><img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/4eb6e573-3d98-47f8-92b0-08bd2ee9d986" alt="Açıklama" height="400" width="200"> </a> 
 <img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/5bfe712e-1eb2-459a-9232-68ac4242d38b" alt="Açıklama" height="400" width="200"></h3>
 
-<h3 align="center">Design of the part where the clothes are located.</h3>
+<h3 align="center">Design of the part where the clothes are located and filters.</h3>
 
-<h3 align="center"><img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/07009069-d3bd-42ea-9f32-c3ade420431f" alt="Açıklama" height="400" width="200"></h3>
+<h3 align="center"><img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/07009069-d3bd-42ea-9f32-c3ade420431f" alt="Açıklama" height="400" width="200"> </a> 
+<img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/576cbcbb-11f4-44f2-9d47-da781a39d03c" alt="Açıklama" height="400" width="200"></h3>
 
 <h3 align="center">Section designed for frequently asked questions.</h3>
 
@@ -31,4 +32,10 @@ I made this screen using scrollview. It contains some animated textViews and lay
 <h3 align="center">Design of the section related to Account.</h3>
 
 <h3 align="center"><img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/238cfe9f-065f-4a39-92e9-460b20c00ccd" alt="Açıklama" height="400" width="200"></h3>
+
+<h3 align="center">Design of the section dress screen.</h3>
+
+<h3 align="center"><img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/88158963-145b-40ff-ad4d-a343210650d9" alt="Açıklama" height="400" width="200"></h3>
+
+
 
