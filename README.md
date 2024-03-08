@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <td><h3 align="center">I made this screen using scrollview. It contains some animated textViews and layouts. Learn to use ConstraintLayout and Linear Layouts more functionally while designing..</h3></td>
+    <td><h3 align="center">I made this screen using scrollview. It contains some animated textViews and layouts. Learn to use Constraint Layout and Linear Layouts more functionally while designing..</h3></td>
   </tr>
   <tr>
     <td><h3 align="center"><img src="https://github.com/MuhammetEmirErkut/Clothing-Store-App/assets/147542769/3a3bb06b-caf9-448e-93a8-e14f1605aa5c" alt="Açıklama" height="400" width="200"></h3></td>
